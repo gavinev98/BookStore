@@ -296,7 +296,8 @@ public class BookInventory implements BookList {
 			oldBook.setQuantity(reminder);
 			tempBookTable.add(oldBook);
 			String table = createTableContent(tempBookTable);
-			System.out.println(table);
+			successOperation = rewriteTable(table);
+			// System.out.println(table);
 		} else
 			System.out.println(
 					"Number of demanded books are more than the number of available books");
