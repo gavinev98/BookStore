@@ -14,6 +14,9 @@ import se.contribe.bookstore.convertor.BigDecimalConvertor;
  */
 public class Command {
 
+	/**
+	 * shows all available books in the database
+	 */
 	public static void showAllBookRecords() {
 		BookInventory bookInventoryObject = new BookInventory();
 		Book[] bookTable = bookInventoryObject.list("");
@@ -39,6 +42,7 @@ public class Command {
 	}
 
 	/**
+	 * Generate a message to show the total number of books
 	 * @param numberResult
 	 */
 	private static void showTotalNumRecords(int numberResult) {
@@ -46,6 +50,9 @@ public class Command {
 				"* Total number of results: " + numberResult + " record(s)");
 	}
 
+	/**
+	 * Shows the results of the book searched by author's name
+	 */
 	public static void showBookRecordSearchedAuthor() {
 		String authorName = "";
 
@@ -82,6 +89,9 @@ public class Command {
 		}
 	}
 
+	/**
+	 * Shows the results of the book searched by title
+	 */
 	public static void showBookRecordSearchedTitle() {
 		String titleName = "";
 
@@ -119,6 +129,8 @@ public class Command {
 	}
 
 	/**
+	 * creates a message for users when they should enter some 
+	 * data from console.
 	 * @param enterMessage
 	 */
 	private static void createEnterMessage(String enterMessage) {
@@ -129,6 +141,7 @@ public class Command {
 	}
 
 	/**
+	 * Create a headline or title for reports.
 	 * @param reportTitle
 	 */
 	private static void createReportTitle(String reportTitle) {
@@ -140,6 +153,11 @@ public class Command {
 		System.out.println("");
 	}
 
+	/**
+	 * adds a book to the database.
+	 * It provides necessary data for the add function (in class BookInventory)
+	 * to add the data to the database.
+	 */
 	public static void addBook() {
 		String title = "";
 		String author = "";
@@ -200,6 +218,11 @@ public class Command {
 
 	}
 
+	/**
+	 * removes or updates a book in the database.
+	 * It provides necessary data for the remove function 
+	 * (in class BookInventory) to remove or update the data in the database.
+	 */
 	public static void removeBook() {
 
 		String title = "";

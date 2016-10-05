@@ -13,6 +13,11 @@ import se.contribe.bookstore.Validator;
  */
 public class XWindowUI {
 
+	/**
+	 * creates a mechanism to check the validity of entered data for 
+	 * the menu as commands.
+	 * @return
+	 */
 	public static String createMenu() {
 		boolean flagToLeaveLoop = false;
 		String commandItem = "";
@@ -47,7 +52,7 @@ public class XWindowUI {
 	}
 
 	/**
-	 * 
+	 * Create a user interface
 	 */
 	private static void menuItem() {
 		System.out.println("+-----------------------------------+");

@@ -17,6 +17,7 @@ public class BookStore {
 	public static void main(String[] args) {
 
 
+		// Menu manager
 		boolean flagToLeaveLoop = true;
 		do {
 			String commandItem = XWindowUI.createMenu();

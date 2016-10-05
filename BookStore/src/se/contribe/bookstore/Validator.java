@@ -13,6 +13,11 @@ import java.util.regex.Pattern;
  */
 public class Validator {
 
+	/**
+	 * validate the search string. 
+	 * @param searchString
+	 * @return
+	 */
 	public static boolean validateSearchString(String searchString) {
 		// Regular expression:
 		// ^$ recognizes empty string
@@ -27,7 +32,7 @@ public class Validator {
 	}
 
 	/**
-	 * This function validates the entry points to the menu in XWindow terminal
+	 * Validates the entry points to the menu in XWindow terminal
 	 * 
 	 * @param commandItem
 	 * @return
@@ -39,6 +44,12 @@ public class Validator {
 				|| commandItem.equals("0");
 	}
 
+	/**
+	 * Checks if the entered string can be convertible to the type
+	 * BigDecimal.
+	 * @param price
+	 * @return
+	 */
 	public static boolean isValidBigDecimal(String price) {
 		try {
 			new BigDecimal(price);
@@ -48,6 +59,11 @@ public class Validator {
 		return true;
 	}
 
+	/**
+	 * Checks if a string contains only digits.
+	 * @param qty
+	 * @return
+	 */
 	public static boolean isValidInt(String qty) {
 		try {
 			Integer.parseInt(qty);
