@@ -15,20 +15,7 @@ public class BookStore {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// BookInventory b = new BookInventory();
-		/*
-		 * Book[] b1 = b.list("");
-		 * 
-		 * if(b1 != null) for(Book bArr : b1) System.out.println("\n\n>>>"+
-		 * bArr.toString());
-		 * 
-		 * System.out.println(">>>>>>>> <<<<<<<");
-		 * 
-		 * Book[] b2 = b.list("author:Cunning Bastard");
-		 * 
-		 * if(b2 != null) for(Book bArr : b2) System.out.println("\n\n>>>"+
-		 * bArr.toString()); else System.out.println("NO RESULT");
-		 */
+
 
 		boolean flagToLeaveLoop = true;
 		do {
