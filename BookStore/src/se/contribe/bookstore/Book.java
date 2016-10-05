@@ -10,11 +10,11 @@ import java.math.BigDecimal;
  *
  */
 public class Book {
-	
+
 	private String title;
 	private String author;
 	private BigDecimal price;
-	
+
 	/**
 	 * Default Constructor that creates a Book object.
 	 */
@@ -23,19 +23,19 @@ public class Book {
 		this.author = "unknown";
 		this.price = new BigDecimal("0.00");
 	}
-	
+
 	/**
 	 * A parameterized Constructor
+	 * 
 	 * @param title
 	 * @param author
 	 * @param price
 	 */
-	public Book(String title, String author, BigDecimal price){
+	public Book(String title, String author, BigDecimal price) {
 		this.title = title;
 		this.author = author;
 		this.price = price;
 	}
-	
 
 	/**
 	 * @return the title
@@ -45,7 +45,8 @@ public class Book {
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -59,7 +60,8 @@ public class Book {
 	}
 
 	/**
-	 * @param author the author to set
+	 * @param author
+	 *            the author to set
 	 */
 	public void setAuthor(String author) {
 		this.author = author;
@@ -73,19 +75,22 @@ public class Book {
 	}
 
 	/**
-	 * @param price the price to set
+	 * @param price
+	 *            the price to set
 	 */
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		
-		return "  Title: " + this.title + "\n  Author: " + this.author 
+
+		return "  Title: " + this.title + "\n  Author: " + this.author
 				+ "\n  Price: " + this.price;
 	}
 
@@ -94,7 +99,8 @@ public class Book {
 	 * @param quantity
 	 * @return
 	 */
-	public static StringBuffer createBookRecordForDataBase(Book book, int quantity) {
+	public static StringBuffer createBookRecordForDataBase(Book book,
+			int quantity) {
 		StringBuffer strBuffer = new StringBuffer();
 		strBuffer.append(book.getTitle() + ";");
 		strBuffer.append(book.getAuthor() + ";");
@@ -102,5 +108,5 @@ public class Book {
 		strBuffer.append(quantity + "\n");
 		return strBuffer;
 	}
-	
+
 }

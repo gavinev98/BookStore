@@ -13,14 +13,14 @@ import java.text.ParseException;
  *
  */
 public class BigDecimalConvertor {
-	
+
 	/**
 	 * This method converts the String type to the BigDecimal type
+	 * 
 	 * @param price
-	 * @return 
+	 * @return
 	 */
 	public static BigDecimal toBigDecimal(String price) {
-		
 
 		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
 		symbols.setGroupingSeparator(',');

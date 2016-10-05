@@ -254,11 +254,12 @@ public class Command {
 		BookInventory bookInventoryObject = new BookInventory();
 		if (bookInventoryObject.remove(bookItem, iRemovedQty)) {
 			System.out.println("");
-			System.out.println(".. NOTE: "+ iRemovedQty +" book item(s) are removed "
-					+ "from the stock successfully.");
+			System.out.println(
+					".. NOTE: " + iRemovedQty + " book item(s) are removed "
+							+ "from the stock successfully.");
 			System.out.println("");
-		}	
-		
+		}
+
 	}
 
 }
