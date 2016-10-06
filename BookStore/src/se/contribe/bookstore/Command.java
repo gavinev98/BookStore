@@ -19,6 +19,8 @@ public class Command {
 	/**
 	 * shows all available books in the database
 	 */
+	private static ArrayList<BasketItem> basketItemArrayList = new ArrayList<>();
+
 	public static void showAllBookRecords() {
 
 		BookInventory bookInventoryObject = new BookInventory();
@@ -308,15 +310,78 @@ public class Command {
 		// Show the available book item to select from
 		ArrayList<BasketItem> bookItemList = new ArrayList<>();
 		BookInventory bookInventoryObject = new BookInventory();
-		int i = 0;
+		int i = 1;
 		for (BookQty book : bookInventoryObject
 				.readBookDatabaseFileWithQuantity()) {
 			bookItemList.add(new BasketItem(i, book));
 			i++;
 		}
 
+		// Display available books for shopping
 		createShoppingCatalogue(bookItemList);
-		
+
+		int selectedItem;
+		selectedItem = validateSelectedItemNumber(i);
+
+		// -1 means cancel the operation
+		if (selectedItem != -1) {
+			System.out.println(".. NOTE: The item ´"
+					+ bookItemList.get(selectedItem).getBookItem().getTitle()
+					+ "´ was added to your basket.");
+
+			// Add an item to the basket
+			basketItemArrayList.add(bookItemList.get(selectedItem));
+		}
+
+		BigDecimal totalPrice = new BigDecimal("0.00");
+		System.out.println("..                       ..");
+		System.out.println(".. Your basket includes: ..");
+		System.out.println("===========================");
+		for (BasketItem b : basketItemArrayList) {
+			System.out.println(b.getBookItem().getTitle());
+			totalPrice = b.getBookItem().getPrice().add(totalPrice);
+		}
+		System.out.println("---------------------------");
+		System.out.println(
+				"* Total of ordered books: " + basketItemArrayList.size());
+		System.out.println("* Total price: " + totalPrice.toString() + " SEK.");
+		System.out.println("===========================");
+	}
+
+	/**
+	 * @param i
+	 */
+	public static int validateSelectedItemNumber(int i) {
+		@SuppressWarnings("resource")
+		Scanner inScan = new Scanner(System.in);
+
+		String itemNo = "";
+
+		boolean flag = true;
+		do {
+			itemNo = inScan.nextLine();
+			if (Validator.isValidInt(itemNo)) {
+				flag = false;
+				if (Integer.parseInt(itemNo) >= i
+						|| Integer.parseInt(itemNo) < 0) {
+					flag = true;
+					System.out.println("!! ERROR: No such an item number !!!");
+					createEnterMessage(
+							"Enter the book ´number´ to order or ´0´ to Cancel> ");
+				}
+			} else {
+				System.out.println("");
+				System.out.println("!! ERROR: Wrong item number !!!");
+				System.out
+						.println("!         Item numbers contain only digits ");
+				System.out.println("!         For example: 13");
+				createEnterMessage(
+						"Enter the book ´number´ to order or ´0´ to Cancel> ");
+			}
+		} while (flag);
+
+		int bookCode = Integer.parseInt(itemNo);
+		return bookCode - 1;
 	}
 
 	/**
@@ -350,6 +415,9 @@ public class Command {
 
 			System.out.println(tempString);
 		}
+		createEnterMessage(
+				"Enter the book ´number´ to order or ´0´ to Cancel> ");
+		System.out.print("");
 	}
 
 	/**
