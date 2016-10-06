@@ -32,6 +32,8 @@ public class Command {
 	}
 
 	/**
+	 * prints all books item in an array of Books returning from the 
+	 * list method in the BookInventory class.
 	 * @param bookTable
 	 */
 	public static void showRecordList(Book[] bookTable) {
