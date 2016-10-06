@@ -27,17 +27,25 @@ public class Command {
 			System.out.println("");
 			System.out.println("No Record was found in the database.");
 		} else {
-			if (bookTable != null) {
-				int i = 1;
-				for (Book bookRecord : bookTable) {
-					System.out.println("> Book item no. " + i);
-					System.out.println(bookRecord.toString());
-					System.out.println("");
-					i++;
-				}
+			showRecordList(bookTable);
+		}
+	}
 
-				showTotalNumRecords(i);
+	/**
+	 * @param bookTable
+	 */
+	public static void showRecordList(Book[] bookTable) {
+		if (bookTable != null) {
+			int i = 1; // book counter
+			for (Book bookRecord : bookTable) {
+				System.out.println("> Book item no. " + i);
+				System.out.println(bookRecord.toString());
+				System.out.println("");
+				i++;
 			}
+
+			// decrease by one, because i is initialized by 1.
+			showTotalNumRecords(--i); 
 		}
 	}
 
@@ -76,16 +84,7 @@ public class Command {
 				System.out.println("No Record was found in the "
 						+ "database. SEARCH KEY (author): " + authorName);
 			} else {
-				if (bookTable != null) {
-					int i = 1;
-					for (Book bookRecord : bookTable) {
-						System.out.println("> Book item no. " + i);
-						System.out.println(bookRecord.toString());
-						System.out.println("");
-						i++;
-					}
-					showTotalNumRecords(i);
-				}
+				showRecordList(bookTable);
 			}
 
 		} catch (Exception e) {
@@ -119,16 +118,7 @@ public class Command {
 				System.out.println("No Record was found in the "
 						+ "database. SEARCH KEY (titles): " + titleName);
 			} else {
-				if (bookTable != null) {
-					int i = 1;
-					for (Book bookRecord : bookTable) {
-						System.out.println("> Book item no. " + i);
-						System.out.println(bookRecord.toString());
-						System.out.println("");
-						i++;
-					}
-					showTotalNumRecords(i);
-				}
+				showRecordList(bookTable);
 			}
 
 		} catch (Exception e) {
