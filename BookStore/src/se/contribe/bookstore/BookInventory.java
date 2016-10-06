@@ -31,9 +31,9 @@ public class BookInventory implements BookList {
 	}
 
 	/**
-	 * reads the Book Data base file. Book database file is a text
-	 * file located in the bin directory. Return a LinkedList that each elements
-	 * is of type Book.
+	 * reads the Book Data base file. Book database file is a text file located
+	 * in the bin directory. Return a LinkedList that each elements is of type
+	 * Book.
 	 * 
 	 * @return
 	 */
@@ -80,11 +80,9 @@ public class BookInventory implements BookList {
 	}
 
 	/**
-	 * reads all four fields of the database including:
-	 * 1. book.bookTitle
-	 * 2. book.bookAuthor
-	 * 3. book.price
-	 * 4. book.numberOfAvailableBook
+	 * reads all four fields of the database including: 1. book.bookTitle 2.
+	 * book.bookAuthor 3. book.price 4. book.numberOfAvailableBook
+	 * 
 	 * @return
 	 */
 	public ArrayList<BookQty> readBookDatabaseFileWithQuantity() {
@@ -272,9 +270,10 @@ public class BookInventory implements BookList {
 	}
 
 	/**
-	 * update number of available books after selling.
-	 * In case, if the number of available books are zero,
-	 * this function remove the book item from the database
+	 * update number of available books after selling. In case, if the number of
+	 * available books are zero, this function remove the book item from the
+	 * database
+	 * 
 	 * @param book
 	 * @param removedQuantity
 	 * @return
@@ -322,9 +321,9 @@ public class BookInventory implements BookList {
 	}
 
 	/**
-	 * It writes the whole database in case of removing a book 
-	 * item or a updating the number of available books. 
-	 * of available books.
+	 * It writes the whole database in case of removing a book item or a
+	 * updating the number of available books. of available books.
+	 * 
 	 * @param successOperation
 	 * @param table
 	 * @return
@@ -367,6 +366,7 @@ public class BookInventory implements BookList {
 
 	/**
 	 * Create a text contains all the records of the database.
+	 * 
 	 * @param BookArrayList
 	 * @return
 	 */

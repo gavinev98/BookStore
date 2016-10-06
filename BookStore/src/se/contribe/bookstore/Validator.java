@@ -14,7 +14,8 @@ import java.util.regex.Pattern;
 public class Validator {
 
 	/**
-	 * validate the search string. 
+	 * validate the search string.
+	 * 
 	 * @param searchString
 	 * @return
 	 */
@@ -45,8 +46,8 @@ public class Validator {
 	}
 
 	/**
-	 * Checks if the entered string can be convertible to the type
-	 * BigDecimal.
+	 * Checks if the entered string can be convertible to the type BigDecimal.
+	 * 
 	 * @param price
 	 * @return
 	 */
@@ -61,6 +62,7 @@ public class Validator {
 
 	/**
 	 * Checks if a string contains only digits.
+	 * 
 	 * @param qty
 	 * @return
 	 */
@@ -71,6 +73,17 @@ public class Validator {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Validates the entry points to the menu in XWindow terminal
+	 * 
+	 * @param commandItem
+	 * @return
+	 */
+	public static boolean isBuyMenuCommandCorrect(String commandItem) {
+		return commandItem.equals("1") || commandItem.equals("2")
+				|| commandItem.equals("3") || commandItem.equals("0");
 	}
 
 }

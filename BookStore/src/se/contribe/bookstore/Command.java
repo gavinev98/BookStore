@@ -32,8 +32,9 @@ public class Command {
 	}
 
 	/**
-	 * prints all books item in an array of Books returning from the 
-	 * list method in the BookInventory class.
+	 * prints all books item in an array of Books returning from the list method
+	 * in the BookInventory class.
+	 * 
 	 * @param bookTable
 	 */
 	public static void showRecordList(Book[] bookTable) {
@@ -47,7 +48,7 @@ public class Command {
 			}
 
 			// decrease by one, because i is initialized by 1.
-			showTotalNumRecords(--i); 
+			showTotalNumRecords(--i);
 		}
 	}
 
@@ -291,5 +292,29 @@ public class Command {
 							+ "from the stock successfully.");
 			System.out.println("");
 		}
+	}
+
+	/**
+	 * provides necessary data to add books to the basket
+	 */
+	public static void addBookToBasket() {
+
+		System.out.println("A book is added to the basket.");
+	}
+
+	/**
+	 * provides necessary data to remove books from the basket
+	 */
+	public static void removeBookFromBasket() {
+
+		System.out.println("A book is removed from the basket.");
+	}
+
+	/**
+	 * order the shopping
+	 */
+	public static void performShopping() {
+
+		System.out.println("Shopping is done.");
 	}
 }
