@@ -4,6 +4,8 @@
 package se.contribe.bookstore;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import se.contribe.bookstore.convertor.BigDecimalConvertor;
@@ -299,7 +301,55 @@ public class Command {
 	 */
 	public static void addBookToBasket() {
 
-		System.out.println("A book is added to the basket.");
+		System.out.println("");
+		System.out.println(">> >> Add a Book to Basket");
+		System.out.println("==========================");
+
+		// Show the available book item to select from
+		ArrayList<BasketItem> bookItemList = new ArrayList<>();
+		BookInventory bookInventoryObject = new BookInventory();
+		int i = 0;
+		for (BookQty book : bookInventoryObject
+				.readBookDatabaseFileWithQuantity()) {
+			bookItemList.add(new BasketItem(i, book));
+			i++;
+		}
+
+		createShoppingCatalogue(bookItemList);
+		
+	}
+
+	/**
+	 * @param bookItemList
+	 */
+	public static void createShoppingCatalogue(
+			ArrayList<BasketItem> bookItemList) {
+		String header = String.format("%1$5s  %2$-50s  %3$-30s  %4$10s  %5$5s",
+				"No.", "Book Title", "Author", "Price", "Qty");
+
+		char ch = '-';
+		char[] characters = new char[110];
+		Arrays.fill(characters, ch);
+		characters[6] = '+';
+		characters[58] = '+';
+		characters[90] = '+';
+		characters[102] = '+';
+
+		System.out.println("");
+		System.out.println(header);
+		System.out.println(characters);
+
+		for (BasketItem bookItem : bookItemList) {
+
+			String tempString = String.format(
+					"%1$5s |%2$-50s |%3$-30s |%4$10s |%5$5s",
+					bookItem.getItemNumber(), bookItem.getBookItem().getTitle(),
+					bookItem.getBookItem().getAuthor(),
+					bookItem.getBookItem().getPrice(),
+					bookItem.getBookItem().getQuantity());
+
+			System.out.println(tempString);
+		}
 	}
 
 	/**
@@ -307,7 +357,9 @@ public class Command {
 	 */
 	public static void removeBookFromBasket() {
 
-		System.out.println("A book is removed from the basket.");
+		System.out.println("");
+		System.out.println(">> >> Remove a Book from Basket");
+		System.out.println("===============================");
 	}
 
 	/**
@@ -315,6 +367,8 @@ public class Command {
 	 */
 	public static void performShopping() {
 
-		System.out.println("Shopping is done.");
+		System.out.println("");
+		System.out.println(">> >> Perform shopping");
+		System.out.println("======================");
 	}
 }
