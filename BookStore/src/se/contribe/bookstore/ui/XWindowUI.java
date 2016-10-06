@@ -55,15 +55,17 @@ public class XWindowUI {
 	 * Create a user interface
 	 */
 	private static void menuItem() {
-		System.out.println("+-----------------------------------+");
-		System.out.println("| 1. Show all books                 |");
-		System.out.println("| 2. Show books (search by authors) |");
-		System.out.println("| 3. Show books (search by titles)  |");
-		System.out.println("| 4. Add a book                     |");
-		System.out.println("| 5. Remove a book                  |");
-		System.out.println("| 6. Buy Books                      |");
-		System.out.println("| 0. Exit                           |");
-		System.out.println("+-----------------------------------+");
+		System.out.println("");
+		System.out.println("+--Main Manu------------------------------+");
+		System.out.println("|  [ 1 ]  Show all books                  |");
+		System.out.println("|  [ 2 ]  Show books (search by authors)  |");
+		System.out.println("|  [ 3 ]  Show books (search by titles)   |");
+		System.out.println("|  [ 4 ]  Add a book                      |");
+		System.out.println("|  [ 5 ]  Remove a book                   |");
+		System.out.println("|  [ 6 ]  Buy Books                       |");
+		System.out.println("|                                         |");
+		System.out.println("|  ( 0 )  Exit                            |");
+		System.out.println("+-----------------------------------------+");
 		System.out.print(" Select an item> ");
 	}
 

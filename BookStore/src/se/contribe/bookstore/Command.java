@@ -18,10 +18,11 @@ public class Command {
 	 * shows all available books in the database
 	 */
 	public static void showAllBookRecords() {
+
 		BookInventory bookInventoryObject = new BookInventory();
 		Book[] bookTable = bookInventoryObject.list("");
 
-		createReportTitle(".. .. .. .. REPORT: Show all books .. .. .. ..");
+		createReportTitle(".. .. .. .. REPORT: Show All Books .. .. .. ..");
 		if (bookTable.length == 0) {
 			System.out.println("");
 			System.out.println("No Record was found in the database.");
@@ -33,16 +34,16 @@ public class Command {
 					System.out.println(bookRecord.toString());
 					System.out.println("");
 					i++;
-
 				}
+
 				showTotalNumRecords(i);
 			}
 		}
-
 	}
 
 	/**
 	 * Generate a message to show the total number of books
+	 * 
 	 * @param numberResult
 	 */
 	private static void showTotalNumRecords(int numberResult) {
@@ -54,6 +55,10 @@ public class Command {
 	 * Shows the results of the book searched by author's name
 	 */
 	public static void showBookRecordSearchedAuthor() {
+
+		System.out.println("");
+		System.out.println(">> Search by Author");
+		System.out.println("===================");
 		String authorName = "";
 
 		@SuppressWarnings("resource")
@@ -62,7 +67,7 @@ public class Command {
 		BookInventory bookInventoryObject = new BookInventory();
 
 		try {
-			createEnterMessage("Enter author name> ");
+			createEnterMessage("Enter ´author´ name> ");
 			authorName = inScan.nextLine();
 
 			Book[] bookTable = bookInventoryObject.list("author:" + authorName);
@@ -93,6 +98,10 @@ public class Command {
 	 * Shows the results of the book searched by title
 	 */
 	public static void showBookRecordSearchedTitle() {
+
+		System.out.println("");
+		System.out.println(">> Search by Title");
+		System.out.println("==================");
 		String titleName = "";
 
 		@SuppressWarnings("resource")
@@ -101,7 +110,7 @@ public class Command {
 		BookInventory bookInventoryObject = new BookInventory();
 
 		try {
-			createEnterMessage("Enter book title> ");
+			createEnterMessage("Enter book ´title´> ");
 			titleName = inScan.nextLine();
 
 			Book[] bookTable = bookInventoryObject.list("title:" + titleName);
@@ -129,36 +138,41 @@ public class Command {
 	}
 
 	/**
-	 * creates a message for users when they should enter some 
-	 * data from console.
+	 * creates a message for users when they should enter some data from
+	 * console.
+	 * 
 	 * @param enterMessage
 	 */
 	private static void createEnterMessage(String enterMessage) {
-		System.out.println("");
-		System.out.println("..                                          ..");
 		System.out.println("..                                          ..");
 		System.out.print(". " + enterMessage);
 	}
 
 	/**
 	 * Create a headline or title for reports.
+	 * 
 	 * @param reportTitle
 	 */
 	private static void createReportTitle(String reportTitle) {
+
 		System.out.println("");
-		System.out.println(".                                            .");
-		System.out.println(".                                            .");
+		System.out.println("..                                          ..");
+		System.out.println("..                                          ..");
 		System.out.println(reportTitle);
 		System.out.println("==============================================");
 		System.out.println("");
 	}
 
 	/**
-	 * adds a book to the database.
-	 * It provides necessary data for the add function (in class BookInventory)
-	 * to add the data to the database.
+	 * adds a book to the database. It provides necessary data for the add
+	 * function (in class BookInventory) to add the data to the database.
 	 */
 	public static void addBook() {
+
+		System.out.println("");
+		System.out.println(">> Add a Book to Database");
+		System.out.println("=========================");
+
 		String title = "";
 		String author = "";
 		String price = "";
@@ -168,15 +182,15 @@ public class Command {
 
 		@SuppressWarnings("resource")
 		Scanner inScan = new Scanner(System.in);
-		createEnterMessage("Enter the book title> ");
+		createEnterMessage("Enter the book ´title´> ");
 		title = inScan.nextLine();
 
-		createEnterMessage("Enter author of the book> ");
+		createEnterMessage("Enter ´author´ of the' book> ");
 		author = inScan.nextLine();
 
 		boolean flagLeaveLoop = true;
 		do {
-			createEnterMessage("Enter price of the book> ");
+			createEnterMessage("Enter ´price´ of the book> ");
 			price = inScan.nextLine();
 
 			if (Validator.isValidBigDecimal(price)) {
@@ -193,7 +207,7 @@ public class Command {
 
 		flagLeaveLoop = true;
 		do {
-			createEnterMessage("Enter the number of the book> ");
+			createEnterMessage("Enter the ´number´ of the book> ");
 			qty = inScan.nextLine();
 
 			if (Validator.isValidInt(qty)) {
@@ -215,15 +229,18 @@ public class Command {
 					+ "database successfully.");
 			System.out.println("");
 		}
-
 	}
 
 	/**
-	 * removes or updates a book in the database.
-	 * It provides necessary data for the remove function 
-	 * (in class BookInventory) to remove or update the data in the database.
+	 * removes or updates a book in the database. It provides necessary data for
+	 * the remove function (in class BookInventory) to remove or update the data
+	 * in the database.
 	 */
 	public static void removeBook() {
+
+		System.out.println("");
+		System.out.println(">> Release Books from Database");
+		System.out.println("==============================");
 
 		String title = "";
 		String author = "";
@@ -234,15 +251,15 @@ public class Command {
 
 		@SuppressWarnings("resource")
 		Scanner inScan = new Scanner(System.in);
-		createEnterMessage("Enter the book title> ");
+		createEnterMessage("Enter the book ´title´> ");
 		title = inScan.nextLine();
 
-		createEnterMessage("Enter author of the book> ");
+		createEnterMessage("Enter ´author´ of the book> ");
 		author = inScan.nextLine();
 
 		boolean flagLeaveLoop = true;
 		do {
-			createEnterMessage("Enter price of the book> ");
+			createEnterMessage("Enter ´price´ of the book> ");
 			price = inScan.nextLine();
 
 			if (Validator.isValidBigDecimal(price)) {
@@ -259,7 +276,7 @@ public class Command {
 
 		flagLeaveLoop = true;
 		do {
-			createEnterMessage("Enter the number of the book> ");
+			createEnterMessage("Enter the ´number´ of the book> ");
 			removedQty = inScan.nextLine();
 
 			if (Validator.isValidInt(removedQty)) {
@@ -282,7 +299,5 @@ public class Command {
 							+ "from the stock successfully.");
 			System.out.println("");
 		}
-
 	}
-
 }
