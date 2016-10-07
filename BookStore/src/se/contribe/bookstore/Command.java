@@ -307,7 +307,8 @@ public class Command {
 		System.out.println(">> >> Add a Book to Basket");
 		System.out.println("==========================");
 
-		// Show the available book item to select from
+		// provides an ArrayList of available books in the book store
+		// database
 		ArrayList<BasketItem> bookItemList = new ArrayList<>();
 		BookInventory bookInventoryObject = new BookInventory();
 		int i = 1;
@@ -318,37 +319,62 @@ public class Command {
 		}
 
 		// Display available books for shopping
-		createShoppingCatalogue(bookItemList);
+		showShoppingCatalogue(bookItemList);
 
 		int selectedItem;
 		selectedItem = validateSelectedItemNumber(i);
 
+		// Add a book item to the basket
 		// -1 means cancel the operation
 		if (selectedItem != -1) {
 			System.out.println(".. NOTE: The item ´"
 					+ bookItemList.get(selectedItem).getBookItem().getTitle()
 					+ "´ was added to your basket.");
 
-			// Add an item to the basket
+			// show book item to the basket
 			basketItemArrayList.add(bookItemList.get(selectedItem));
 		}
 
-		BigDecimal totalPrice = new BigDecimal("0.00");
-		System.out.println("..                       ..");
-		System.out.println(".. Your basket includes: ..");
-		System.out.println("===========================");
-		for (BasketItem b : basketItemArrayList) {
-			System.out.println(b.getBookItem().getTitle());
-			totalPrice = b.getBookItem().getPrice().add(totalPrice);
-		}
-		System.out.println("---------------------------");
-		System.out.println(
-				"* Total of ordered books: " + basketItemArrayList.size());
-		System.out.println("* Total price: " + totalPrice.toString() + " SEK.");
-		System.out.println("===========================");
+		// show the current basket
+		showBasketItems();
 	}
 
 	/**
+	 * shows the book item in the current basket
+	 */
+	public static void showBasketItems() {
+		// header of the report
+		BigDecimal totalPrice = new BigDecimal("0.00");
+		System.out.println("..                       ..");
+		System.out.println(".. Your basket includes: ..");
+		System.out.println("==========================="
+				+ "===========================" + "=============");
+
+		// items in the basket are printed
+		for (BasketItem b : basketItemArrayList) {
+
+			String tempString = String.format("%1$5s %2$-50s %3$10s", "+",
+					b.getBookItem().getTitle(), b.getBookItem().getPrice());
+
+			System.out.println(tempString);
+			// calculate total price in the basket
+			totalPrice = b.getBookItem().getPrice().add(totalPrice);
+		}
+
+		// footer of the report
+		System.out.println("---------------------------"
+				+ "---------------------------" + "-------------");
+		System.out.println(
+				"* Total of ordered books: " + basketItemArrayList.size());
+		System.out.println("* Total price: " + totalPrice.toString() + " SEK.");
+		System.out.println("==========================="
+				+ "===========================" + "=============");
+	}
+
+	/**
+	 * checks if the number of selected item from the available books in the
+	 * book store database is correct/valid.
+	 * 
 	 * @param i
 	 */
 	public static int validateSelectedItemNumber(int i) {
@@ -360,8 +386,13 @@ public class Command {
 		boolean flag = true;
 		do {
 			itemNo = inScan.nextLine();
+
+			// if the itemNo contains only digits
 			if (Validator.isValidInt(itemNo)) {
 				flag = false;
+
+				// if item number is between 1 and the max number
+				// in the list of available books
 				if (Integer.parseInt(itemNo) >= i
 						|| Integer.parseInt(itemNo) < 0) {
 					flag = true;
@@ -385,10 +416,15 @@ public class Command {
 	}
 
 	/**
+	 * prints the list of available books in the book store database for
+	 * shopping
+	 * 
 	 * @param bookItemList
 	 */
-	public static void createShoppingCatalogue(
+	public static void showShoppingCatalogue(
 			ArrayList<BasketItem> bookItemList) {
+
+		// a formated header for the report
 		String header = String.format("%1$5s  %2$-50s  %3$-30s  %4$10s  %5$5s",
 				"No.", "Book Title", "Author", "Price", "Qty");
 
@@ -404,6 +440,7 @@ public class Command {
 		System.out.println(header);
 		System.out.println(characters);
 
+		// prints items in the book store database
 		for (BasketItem bookItem : bookItemList) {
 
 			String tempString = String.format(
@@ -425,9 +462,34 @@ public class Command {
 	 */
 	public static void removeBookFromBasket() {
 
+		// a head title for the list
 		System.out.println("");
 		System.out.println(">> >> Remove a Book from Basket");
 		System.out.println("===============================");
+
+		// provides an ArrayList of available books in the book store
+		// database
+		/*
+		 * ArrayList<BasketItem> bookItemList = new ArrayList<>(); BookInventory
+		 * bookInventoryObject = new BookInventory(); int i = 1; for (BookQty
+		 * book : bookInventoryObject .readBookDatabaseFileWithQuantity()) {
+		 * bookItemList.add(new BasketItem(i, book)); i++; }
+		 * 
+		 * // <> <> <> <> Display available books for shopping // <> <> <> <>
+		 * showShoppingCatalogue(bookItemList);
+		 * 
+		 * int selectedItem; selectedItem = validateSelectedItemNumber(i);
+		 * 
+		 * // -1 means cancel the operation if (selectedItem != -1) {
+		 * System.out.println(".. NOTE: The item ´" +
+		 * bookItemList.get(selectedItem).getBookItem().getTitle() +
+		 * "´ was added to your basket.");
+		 * 
+		 * // Add an item to the basket
+		 * basketItemArrayList.add(bookItemList.get(selectedItem)); }
+		 * 
+		 * showBasketItems();
+		 */
 	}
 
 	/**
