@@ -22,12 +22,18 @@ import se.contribe.bookstore.convertor.BigDecimalConvertor;
 public class BookInventory implements BookList {
 
 	private String filePath;
+	private ArrayList<BasketItem> basketItemArrayList;
 
 	/**
 	 * Default constructor
 	 */
 	public BookInventory() {
 		this.filePath = new File("bookstoredata.txt").getAbsolutePath();
+	}
+
+	public BookInventory(ArrayList<BasketItem> basketItemArrayList) {
+		this();
+		this.basketItemArrayList = basketItemArrayList;
 	}
 
 	/**
@@ -265,8 +271,88 @@ public class BookInventory implements BookList {
 	 */
 	@Override
 	public int[] buy(Book... books) {
-		// TODO Auto-generated method stub
-		return null;
+
+		int[] status = { 0, 0, 0 };
+		synchronized (this.filePath) {
+			
+			// list of books with quantity
+			ArrayList<BookQty> bookQtyArrayList = this
+					.readBookDatabaseFileWithQuantity();
+
+			if (this.basketItemArrayList.size() != 0) {
+				// elements from basket list
+				for (BasketItem basketItem : this.basketItemArrayList) {
+
+					boolean found = false;
+					// elements from the book store database
+					for (BookQty bookItemQty : bookQtyArrayList)
+
+						// if both elements are exactly the same
+						// i.e. same primary keys (PK's)
+						// change the Quantity in the book store database
+						// in the main
+						if ((basketItem.getBookItem().getTitle()
+								.equals(bookItemQty.getTitle()))
+								&& (basketItem.getBookItem().getAuthor()
+										.equals(bookItemQty.getAuthor()))
+								&& (basketItem.getBookItem().getPrice()
+										.compareTo(
+												bookItemQty.getPrice()) == 0)) {
+							found = true;
+							if (bookItemQty.getQuantity() == 0)
+								status[1]++;
+
+							// update - ok
+							int reminder = bookItemQty.getQuantity() - 1;
+							bookItemQty.setQuantity(reminder);
+						}
+					if (found == false)
+						status[2]++;
+
+				}
+				
+				if(status[0] == 0 && status[1] == 0 && status[2] == 0){
+					boolean successOperation = false;
+					File dbBook = new File(this.filePath);
+
+					FileWriter fileWriter;
+					BufferedWriter bufferWriter = null;
+
+
+						try {
+							fileWriter = new FileWriter(this.filePath);
+							bufferWriter = new BufferedWriter(fileWriter);
+
+							bufferWriter.write(createTableContent(bookQtyArrayList));
+
+							successOperation = true;
+						} catch (IOException ioe) {
+							System.out.println(
+									"BookInventory> ERROR 07> " + ioe.getMessage());
+							ioe.printStackTrace();
+						} finally {
+							if (bufferWriter != null)
+								try {
+									bufferWriter.close();
+								} catch (IOException e) {
+									System.out.println(
+											"BookInventory> ERROR 08> " + e.getMessage());
+									e.printStackTrace();
+								}
+						}
+
+					
+				}
+
+			} else {
+				System.out.println("");
+				System.out.println("!! ERROR: Basket is empty!!!");
+				status[0]++;
+			}
+
+		}
+	
+		return status;
 	}
 
 	/**

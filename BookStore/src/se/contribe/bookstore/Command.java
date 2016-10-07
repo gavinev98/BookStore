@@ -23,9 +23,11 @@ public class Command {
 
 	public static void showAllBookRecords() {
 
+		// make an array of all book items in the book store data base
 		BookInventory bookInventoryObject = new BookInventory();
 		Book[] bookTable = bookInventoryObject.list("");
 
+		// create the report header
 		createReportTitle(".. .. .. .. REPORT: Show All Books .. .. .. ..");
 		if (bookTable.length == 0) {
 			System.out.println("");
@@ -554,5 +556,49 @@ public class Command {
 		System.out.println("");
 		System.out.println(">> >> Perform shopping");
 		System.out.println("======================");
+
+		// present the items in the basket
+		showBasketItems(true);
+
+		Book[] books;
+		
+		
+		
+		@SuppressWarnings("resource")
+		Scanner inScan = new Scanner(System.in);
+		String sure = null;
+		do {
+
+			sure = "";
+			createEnterMessage(
+					"Are you sure that you want to order the items in "
+							+ "your basket (y/n)> ");
+
+			sure = inScan.nextLine();
+		} while (!sure.equals("y") && !sure.equals("Y") && !sure.equals("n")
+				&& !sure.equals("N"));
+
+		if (sure.equals("y") || sure.equals("Y")) {
+			
+			BookInventory bookInventoryObject = new BookInventory(basketItemArrayList);
+			
+			books = bookInventoryObject.list("");
+			int[] status = new int[3];
+			status = bookInventoryObject.buy(books);
+
+			if (status[0] == 0 && status[1] == 0 && status[2] == 0) {
+				System.out.println("");
+				System.out.println(
+						".. NOTE: Shopping was performed " + "successfully");
+				System.out.println("   Thank you for your purchase!");
+				basketItemArrayList.clear();
+			}else{
+					System.out.println("");
+					System.out.println(
+							".. NOTE: Some items are not in the "
+							+ "stock or does not exist in the stock");
+			}
+
+		}
 	}
 }
