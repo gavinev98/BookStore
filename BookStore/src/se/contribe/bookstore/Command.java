@@ -179,6 +179,8 @@ public class Command {
 		String qty = "";
 		int iQty = 0;
 
+		// providing necessary information for adding a book to the 
+		// book store database
 		@SuppressWarnings("resource")
 		Scanner inScan = new Scanner(System.in);
 		createEnterMessage("Enter the book ´title´> ");
@@ -220,6 +222,7 @@ public class Command {
 			}
 		} while (flagLeaveLoop);
 
+		// adding book to the book store data base
 		Book bookItem = new Book(title, author, bdPrice);
 		BookInventory bookInventoryObject = new BookInventory();
 		if (bookInventoryObject.add(bookItem, iQty)) {
@@ -248,6 +251,7 @@ public class Command {
 		String removedQty = "";
 		int iRemovedQty = 0;
 
+		// providing necessary data for deletion process
 		@SuppressWarnings("resource")
 		Scanner inScan = new Scanner(System.in);
 		createEnterMessage("Enter the book ´title´> ");
@@ -289,6 +293,7 @@ public class Command {
 			}
 		} while (flagLeaveLoop);
 
+		// removing the book item from the book store database
 		Book bookItem = new Book(title, author, bdPrice);
 		BookInventory bookInventoryObject = new BookInventory();
 		if (bookInventoryObject.remove(bookItem, iRemovedQty)) {
@@ -562,6 +567,8 @@ public class Command {
 
 		Book[] books;
 
+		// asking for user assurance if she or he wants to buy 
+		// the items in the basket
 		@SuppressWarnings("resource")
 		Scanner inScan = new Scanner(System.in);
 		String sure = null;
@@ -578,6 +585,7 @@ public class Command {
 
 		if (sure.equals("y") || sure.equals("Y")) {
 
+			// buying books in the basket
 			BookInventory bookInventoryObject = new BookInventory(
 					basketItemArrayList);
 
@@ -585,6 +593,7 @@ public class Command {
 			int[] status = new int[3];
 			status = bookInventoryObject.buy(books);
 
+			// result of shopping transaction
 			if (status[0] == 0 && status[1] == 0 && status[2] == 0) {
 				System.out.println("");
 				System.out.println(

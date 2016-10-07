@@ -95,11 +95,10 @@ public class Book {
 	}
 
 	/**
-	 * creates a record.
-	 * This record can be stored in the text file.
-	 * the record structure is as follows:
-	 * bookname;authorsname;bookprice;numberofbook
+	 * creates a record. This record can be stored in the text file. the record
+	 * structure is as follows: bookname;authorsname;bookprice;numberofbook
 	 * semicolon is the spliter between fields
+	 * 
 	 * @param book
 	 * @param quantity
 	 * @return

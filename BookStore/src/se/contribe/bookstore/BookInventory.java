@@ -31,6 +31,10 @@ public class BookInventory implements BookList {
 		this.filePath = new File("bookstoredata.txt").getAbsolutePath();
 	}
 
+	/**
+	 * Parameterized constructor
+	 * @param basketItemArrayList
+	 */
 	public BookInventory(ArrayList<BasketItem> basketItemArrayList) {
 		this();
 		this.basketItemArrayList = basketItemArrayList;
