@@ -274,7 +274,7 @@ public class BookInventory implements BookList {
 
 		int[] status = { 0, 0, 0 };
 		synchronized (this.filePath) {
-			
+
 			// list of books with quantity
 			ArrayList<BookQty> bookQtyArrayList = this
 					.readBookDatabaseFileWithQuantity();
@@ -310,38 +310,34 @@ public class BookInventory implements BookList {
 						status[2]++;
 
 				}
-				
-				if(status[0] == 0 && status[1] == 0 && status[2] == 0){
-					boolean successOperation = false;
-					File dbBook = new File(this.filePath);
+
+				if (status[0] == 0 && status[1] == 0 && status[2] == 0) {
 
 					FileWriter fileWriter;
 					BufferedWriter bufferWriter = null;
 
+					try {
+						fileWriter = new FileWriter(this.filePath);
+						bufferWriter = new BufferedWriter(fileWriter);
 
-						try {
-							fileWriter = new FileWriter(this.filePath);
-							bufferWriter = new BufferedWriter(fileWriter);
+						bufferWriter
+								.write(createTableContent(bookQtyArrayList));
 
-							bufferWriter.write(createTableContent(bookQtyArrayList));
+					} catch (IOException ioe) {
+						System.out.println(
+								"BookInventory> ERROR 07> " + ioe.getMessage());
+						ioe.printStackTrace();
+					} finally {
+						if (bufferWriter != null)
+							try {
+								bufferWriter.close();
+							} catch (IOException e) {
+								System.out.println("BookInventory> ERROR 08> "
+										+ e.getMessage());
+								e.printStackTrace();
+							}
+					}
 
-							successOperation = true;
-						} catch (IOException ioe) {
-							System.out.println(
-									"BookInventory> ERROR 07> " + ioe.getMessage());
-							ioe.printStackTrace();
-						} finally {
-							if (bufferWriter != null)
-								try {
-									bufferWriter.close();
-								} catch (IOException e) {
-									System.out.println(
-											"BookInventory> ERROR 08> " + e.getMessage());
-									e.printStackTrace();
-								}
-						}
-
-					
 				}
 
 			} else {
@@ -351,7 +347,7 @@ public class BookInventory implements BookList {
 			}
 
 		}
-	
+
 		return status;
 	}
 

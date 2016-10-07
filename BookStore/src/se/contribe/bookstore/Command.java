@@ -561,9 +561,7 @@ public class Command {
 		showBasketItems(true);
 
 		Book[] books;
-		
-		
-		
+
 		@SuppressWarnings("resource")
 		Scanner inScan = new Scanner(System.in);
 		String sure = null;
@@ -579,9 +577,10 @@ public class Command {
 				&& !sure.equals("N"));
 
 		if (sure.equals("y") || sure.equals("Y")) {
-			
-			BookInventory bookInventoryObject = new BookInventory(basketItemArrayList);
-			
+
+			BookInventory bookInventoryObject = new BookInventory(
+					basketItemArrayList);
+
 			books = bookInventoryObject.list("");
 			int[] status = new int[3];
 			status = bookInventoryObject.buy(books);
@@ -592,11 +591,11 @@ public class Command {
 						".. NOTE: Shopping was performed " + "successfully");
 				System.out.println("   Thank you for your purchase!");
 				basketItemArrayList.clear();
-			}else{
-					System.out.println("");
-					System.out.println(
-							".. NOTE: Some items are not in the "
-							+ "stock or does not exist in the stock");
+			} else {
+				System.out.println("");
+				System.out.println("!! ERROR: Some items are not in the "
+						+ "stock or does not exist in the stock !!!");
+				System.out.println("   Shopping was NOT perfomed.");
 			}
 
 		}
