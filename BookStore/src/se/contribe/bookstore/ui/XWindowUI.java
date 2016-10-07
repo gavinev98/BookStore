@@ -116,7 +116,8 @@ public class XWindowUI {
 		System.out.println("+--Buy Books------------------------------+");
 		System.out.println("|  [ 1 ]  Add a book to your basket       |");
 		System.out.println("|  [ 2 ]  Remove a book from your basket  |");
-		System.out.println("|  [ 3 ]  Buy the current basket          |");
+		System.out.println("|  [ 3 ]  Show the basket items           |");
+		System.out.println("|  [ 4 ]  Buy the current basket          |");
 		System.out.println("|                                         |");
 		System.out.println("|  ( 0 )  Exit (Drop the current order)   |");
 		System.out.println("+-----------------------------------------+");
@@ -200,6 +201,12 @@ public class XWindowUI {
 				break;
 
 			case "3":
+				// Show items in the basket
+				// true: report items in the basket with their id number.
+				Command.showBasketItems(true);
+				break;
+
+			case "4":
 				// Perform shopping
 				Command.performShopping();
 				break;

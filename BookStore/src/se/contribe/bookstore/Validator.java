@@ -83,7 +83,8 @@ public class Validator {
 	 */
 	public static boolean isBuyMenuCommandCorrect(String commandItem) {
 		return commandItem.equals("1") || commandItem.equals("2")
-				|| commandItem.equals("3") || commandItem.equals("0");
+				|| commandItem.equals("3") || commandItem.equals("4")
+				|| commandItem.equals("0");
 	}
 
 }

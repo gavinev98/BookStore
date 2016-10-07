@@ -311,18 +311,21 @@ public class Command {
 		// database
 		ArrayList<BasketItem> bookItemList = new ArrayList<>();
 		BookInventory bookInventoryObject = new BookInventory();
-		int i = 1;
+
+		// An id for each item in the book store database.
+		int availableBookItemId = 1;
+
 		for (BookQty book : bookInventoryObject
 				.readBookDatabaseFileWithQuantity()) {
-			bookItemList.add(new BasketItem(i, book));
-			i++;
+			bookItemList.add(new BasketItem(availableBookItemId, book));
+			availableBookItemId++;
 		}
 
 		// Display available books for shopping
 		showShoppingCatalogue(bookItemList);
 
 		int selectedItem;
-		selectedItem = validateSelectedItemNumber(i);
+		selectedItem = validateSelectedItemNumber(availableBookItemId);
 
 		// Add a book item to the basket
 		// -1 means cancel the operation
@@ -331,18 +334,30 @@ public class Command {
 					+ bookItemList.get(selectedItem).getBookItem().getTitle()
 					+ "´ was added to your basket.");
 
-			// show book item to the basket
+			// add a book item to the basket
 			basketItemArrayList.add(bookItemList.get(selectedItem));
 		}
 
+		// generate a new id for each item in the basket.
+		int basketItemId = 1;
+		for (BasketItem b : basketItemArrayList) {
+			b.setItemNumber(basketItemId);
+			basketItemId++;
+		}
+
 		// show the current basket
-		showBasketItems();
+		// false: print the report without Id number (use + sign)
+		showBasketItems(false);
 	}
 
 	/**
-	 * shows the book item in the current basket
+	 * shows the book item in the current basket if showId is true, report shows
+	 * the book item in the basket with correspondent id number, if showId is
+	 * false, it shows a + sign instead of the id number.
+	 * 
+	 * @param showId
 	 */
-	public static void showBasketItems() {
+	public static void showBasketItems(boolean showId) {
 		// header of the report
 		BigDecimal totalPrice = new BigDecimal("0.00");
 		System.out.println("..                       ..");
@@ -351,14 +366,29 @@ public class Command {
 				+ "===========================" + "=============");
 
 		// items in the basket are printed
-		for (BasketItem b : basketItemArrayList) {
+		// true: report with id number for items in the basket
+		// false: report without id number (with +) for items in the basket
+		if (showId == true) {
 
-			String tempString = String.format("%1$5s %2$-50s %3$10s", "+",
-					b.getBookItem().getTitle(), b.getBookItem().getPrice());
+			for (BasketItem b : basketItemArrayList) {
 
-			System.out.println(tempString);
-			// calculate total price in the basket
-			totalPrice = b.getBookItem().getPrice().add(totalPrice);
+				String tempString = String.format("%1$5s %2$-50s %3$10s",
+						b.getItemNumber(), b.getBookItem().getTitle(),
+						b.getBookItem().getPrice());
+				System.out.println(tempString);
+				// calculate total price in the basket
+				totalPrice = b.getBookItem().getPrice().add(totalPrice);
+			}
+		} else {
+
+			for (BasketItem b : basketItemArrayList) {
+
+				String tempString = String.format("%1$5s %2$-50s %3$10s", "+",
+						b.getBookItem().getTitle(), b.getBookItem().getPrice());
+				System.out.println(tempString);
+				// calculate total price in the basket
+				totalPrice = b.getBookItem().getPrice().add(totalPrice);
+			}
 		}
 
 		// footer of the report
