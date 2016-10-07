@@ -113,7 +113,7 @@ public class XWindowUI {
 	 */
 	public static void createBuyMenuUi() {
 		System.out.println("");
-		System.out.println("+--Buy Books------------------------------+");
+		System.out.println("+--Main Menu -> Buy Books-----------------+");
 		System.out.println("|  [ 1 ]  Add a book to your basket       |");
 		System.out.println("|  [ 2 ]  Remove a book from your basket  |");
 		System.out.println("|  [ 3 ]  Show the basket items           |");

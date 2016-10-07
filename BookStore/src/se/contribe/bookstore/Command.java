@@ -339,15 +339,23 @@ public class Command {
 		}
 
 		// generate a new id for each item in the basket.
+		refreshAllBasketItemId();
+
+		// show the current basket
+		// false: print the report without Id number (use + sign)
+		showBasketItems(false);
+	}
+
+	/**
+	 * After any change to the basket, this function creates new id for all
+	 * elements in the basket
+	 */
+	public static void refreshAllBasketItemId() {
 		int basketItemId = 1;
 		for (BasketItem b : basketItemArrayList) {
 			b.setItemNumber(basketItemId);
 			basketItemId++;
 		}
-
-		// show the current basket
-		// false: print the report without Id number (use + sign)
-		showBasketItems(false);
 	}
 
 	/**
@@ -403,11 +411,13 @@ public class Command {
 
 	/**
 	 * checks if the number of selected item from the available books in the
-	 * book store database is correct/valid.
+	 * book store database is correct/valid. The sizeOfArrayList parameter
+	 * should be one higher than the size of the list. For example if the size
+	 * of array is 5, number 6 should be passed to the function.
 	 * 
-	 * @param i
+	 * @param sizeOfArrayList
 	 */
-	public static int validateSelectedItemNumber(int i) {
+	public static int validateSelectedItemNumber(int sizeOfArrayList) {
 		@SuppressWarnings("resource")
 		Scanner inScan = new Scanner(System.in);
 
@@ -423,7 +433,7 @@ public class Command {
 
 				// if item number is between 1 and the max number
 				// in the list of available books
-				if (Integer.parseInt(itemNo) >= i
+				if (Integer.parseInt(itemNo) >= sizeOfArrayList
 						|| Integer.parseInt(itemNo) < 0) {
 					flag = true;
 					System.out.println("!! ERROR: No such an item number !!!");
@@ -497,29 +507,43 @@ public class Command {
 		System.out.println(">> >> Remove a Book from Basket");
 		System.out.println("===============================");
 
-		// provides an ArrayList of available books in the book store
-		// database
-		/*
-		 * ArrayList<BasketItem> bookItemList = new ArrayList<>(); BookInventory
-		 * bookInventoryObject = new BookInventory(); int i = 1; for (BookQty
-		 * book : bookInventoryObject .readBookDatabaseFileWithQuantity()) {
-		 * bookItemList.add(new BasketItem(i, book)); i++; }
-		 * 
-		 * // <> <> <> <> Display available books for shopping // <> <> <> <>
-		 * showShoppingCatalogue(bookItemList);
-		 * 
-		 * int selectedItem; selectedItem = validateSelectedItemNumber(i);
-		 * 
-		 * // -1 means cancel the operation if (selectedItem != -1) {
-		 * System.out.println(".. NOTE: The item ´" +
-		 * bookItemList.get(selectedItem).getBookItem().getTitle() +
-		 * "´ was added to your basket.");
-		 * 
-		 * // Add an item to the basket
-		 * basketItemArrayList.add(bookItemList.get(selectedItem)); }
-		 * 
-		 * showBasketItems();
-		 */
+		// show the items in the basket.
+		// true: show each item with its equivalent id number.
+		showBasketItems(true);
+		createEnterMessage(
+				"Enter the book ´number´ to remove or ´0´ to Cancel> ");
+		int selectedItem = 0;
+		int sizeBasketList = basketItemArrayList.size() + 1;
+		selectedItem = validateSelectedItemNumber(sizeBasketList);
+
+		// asking which item to Remove a book item from the basket
+		// -1 means cancel the operation
+		if (selectedItem != -1) {
+
+			@SuppressWarnings("resource")
+			Scanner inScan = new Scanner(System.in);
+			String sure = null;
+			do {
+
+				sure = "";
+				createEnterMessage(
+						"Are you sure to remove item ´"
+								+ basketItemArrayList.get(selectedItem)
+										.getBookItem().getTitle()
+								+ "´ from your basket (y/n)> ");
+
+				sure = inScan.nextLine();
+			} while (!sure.equals("y") && !sure.equals("Y") && !sure.equals("n")
+					&& !sure.equals("N"));
+
+			if (sure.equals("y") || sure.equals("Y")) {
+				// Remove a book item from the basket
+				basketItemArrayList.remove(selectedItem);
+				refreshAllBasketItemId();
+				System.out.println(
+						".. NOTE: One item was removed from the basket successfully!");
+			}
+		}
 	}
 
 	/**
